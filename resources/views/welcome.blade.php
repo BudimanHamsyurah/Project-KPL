@@ -8,16 +8,16 @@
                 <table class="table table-bordered table-striped" id="arrival">
                     <thead>
                         <tr>
-                            <th rowspan="2" scope="col" id="lLogo">{{ __('Logo Kapal') }}</th>
-                            <th rowspan="2" scope="col" id="lNama">{{ __('Nama Kapal') }}</th>
-                            <th colspan="2" scope="col" id="lWaktu">{{ __('Perkiraan Waktu Kedatangan') }}</th>
-                            <th rowspan="2" scope="col" id="lAsal">{{ __('Pelabuhan Asal') }}</th>
-                            <th rowspan="2" scope="col" id="lTujuan">{{ __('Pelabuhan Tujuan') }}</th>
-                            <th rowspan="2" scope="col" id="lStatus">{{ __('Status') }}</th>
+                            <th rowspan="2" scope="col" id="lLogo" width="150px">{{ __('Logo Kapal') }}</th>
+                            <th rowspan="2" scope="col" id="lNama" width="250px">{{ __('Nama Kapal') }}</th>
+                            <th colspan="2" scope="col" id="lWaktu" width="400px">{{ __('Perkiraan Waktu Kedatangan') }}</th>
+                            <th rowspan="2" scope="col" id="lAsal" width="200px">{{ __('Pelabuhan Asal') }}</th>
+                            <th rowspan="2" scope="col" id="lTujuan" width="200px">{{ __('Pelabuhan Tujuan') }}</th>
+                            <th rowspan="2" scope="col" id="lStatus" width="150px">{{ __('Status') }}</th>
                         </tr>
                         <tr>
-                            <th id="lTanggal">{{ __('Tanggal') }}</th>
-                            <th id="lJam">{{ __('Waktu') }}</th>
+                            <th id="lTanggal" width="200px">{{ __('Tanggal') }}</th>
+                            <th id="lJam" width="200px">{{ __('Waktu') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -139,15 +139,6 @@
             const jam = document.getElementById("lJam");
 
             setInterval(function() {
-                logo.innerHTML = "Logo Kapal"
-                nama.innerHTML = "Nama Kapal"
-                waktu.innerHTML = "Perkiraan Waktu Kedatangan"
-                asal.innerHTML = "Pelabuhan Asal"
-                tujuan.innerHTML = "Pelabuhan Tujuan"
-                tanggal.innerHTML = "Tanggal"
-                jam.innerHTML = "Waktu"
-            }, 1000);
-            setInterval(function() {
                 logo.innerHTML = "Ship Logo"
                 nama.innerHTML = "Ship Name"
                 waktu.innerHTML = "Estimated Time of Arrival"
@@ -155,7 +146,17 @@
                 tujuan.innerHTML = "Destination Port"
                 tanggal.innerHTML = "Date"
                 jam.innerHTML = "Time"
-            }, 2000);
+            }, 5000);
+            setInterval(function() {
+                logo.innerHTML = "Logo Kapal"
+                nama.innerHTML = "Nama Kapal"
+                waktu.innerHTML = "Perkiraan Waktu Kedatangan"
+                asal.innerHTML = "Pelabuhan Asal"
+                tujuan.innerHTML = "Pelabuhan Tujuan"
+                tanggal.innerHTML = "Tanggal"
+                jam.innerHTML = "Waktu"
+            }, 10000);
+            
         });
     </script>
 </div>
