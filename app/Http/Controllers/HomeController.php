@@ -29,10 +29,14 @@ class HomeController extends Controller
         $arrival = Arrival::where('status', '!=', 'Selesai')->get();
         return view('home', compact('ships', 'arrival'));
     }
-
- 
+    
     public function addKapal(Request $request)
     {
+        $request->validate([
+            'nama_kapal' => ['required', 'string', 'min:5', 'max:50',],
+            'logo_kapal' => ['required', 'image',],
+            ]
+        );
         $data = $request->all();
         $fileName = time().$request->file('logo_kapal')->getClientOriginalName();
         $path = $request->file('logo_kapal')->storeAs('images', $fileName, 'public');
@@ -42,7 +46,13 @@ class HomeController extends Controller
     }
     public function add_arrival(Request $request)
     {
-
+        $request->validate([
+            'schedule' => ['required', 'date',],
+            'jam' => ['required',],
+            'from' => ['required', 'string', 'alpha', 'min:3', 'max:50',],
+            'destination' => ['required', 'string', 'alpha', 'min:3', 'max:50',],
+            ]
+        );
         Arrival::create([
             'id_ship' => $request['nama_kapal'],
             'schedule' => $request['schedule'],
@@ -56,7 +66,11 @@ class HomeController extends Controller
 
     public function edit_arrival(Request $request, $id)
     {
-
+        $request->validate([
+            'schedule' => ['required', 'date',],
+            'jam' => ['required',],
+            ]
+        );
         Arrival::findOrFail($id)->update([
             'schedule' => $request['schedule'],
             'jam' => $request['jam'],

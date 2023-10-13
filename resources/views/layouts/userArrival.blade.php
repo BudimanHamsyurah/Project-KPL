@@ -432,7 +432,7 @@
 
                     </ul>
                     <span class="navbar-text text-center text-dark font-weight-bold">
-                        <h2 id="head"><b>Informasi Jadwal Kedatangan</b></h2>
+                        <h2 id="head"><b>Informasi Jadwal Kedatangan Kapal</b></h2>
                         <h2 id="txt"></h2>
                     </span>
 
@@ -509,11 +509,12 @@
 
             const judul = document.getElementById("head");
             setInterval(function() {
-                judul.innerHTML = "Informasi Jadwal Kedatangan"
-            }, 1000);
+                judul.innerHTML = "Ship Arrival Schedule Information"
+            }, 5000);
             setInterval(function() {
-                judul.innerHTML = "Arrival Schedule Information"
-            }, 2000);
+                judul.innerHTML = "Informasi Jadwal Kedatangan Kapal"
+            }, 10000);
+
 
             function startTime() {
                 const today = new Date();

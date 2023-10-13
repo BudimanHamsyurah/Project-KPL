@@ -34,6 +34,14 @@ class DepartureController extends Controller
     public function add_departure(Request $request)
     {
 
+        $request->validate([
+            'schedule' => ['required', 'date',],
+            'jam' => ['required',],
+            'from' => ['required', 'string', 'alpha', 'min:3', 'max:50',],
+            'destination' => ['required', 'string', 'alpha', 'min:3', 'max:50',],
+        ]
+
+        );
         Departure::create([
             'id_ship' => $request['nama_kapal'],
             'schedule' => $request['schedule'],
@@ -47,7 +55,11 @@ class DepartureController extends Controller
 
     public function edit_departure(Request $request, $id)
     {
-
+        $request->validate([
+            'schedule' => ['required', 'date',],
+            'jam' => ['required',],
+        ]
+        );
         Departure::findOrFail($id)->update([
             'schedule' => $request['schedule'],
             'jam' => $request['jam'],
