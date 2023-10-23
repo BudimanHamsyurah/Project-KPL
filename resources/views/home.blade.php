@@ -36,9 +36,9 @@
                 <table class="table table-bordered table-striped text-center" id="arrival">
                     <thead>
                         <tr>
-                            <th scope="col">{{ __('No') }}</th>
                             <th scope="col">{{ __('Logo Kapal') }}</th>
                             <th scope="col">{{ __('Nama Kapal') }}</th>
+                            <th scope="col">{{ __('Jenis Kapal') }}</th>
                             <th scope="col">{{ __('Jadwal Kedatangan') }}</th>
                             <th scope="col">{{ __('Pelabuhan Asal') }}</th>
                             <th scope="col">{{ __('Pelabuhan Tujuan') }}</th>
@@ -52,9 +52,9 @@
                     <tbody>
                         @foreach ($arrival as $items)
                         <tr>
-                            <td scope="col">{{ !empty($loop->iteration) ? $loop->iteration : '-' }}</td>
                             <td scope="col"><img src="{{ asset($items->Ship->logo_kapal) }}" width="50" height="50"></td>
                             <td scope="col">{{ !empty($items->Ship->nama_kapal) ? $items->Ship->nama_kapal : '-' }}</td>
+                            <td scope="col">{{ !empty($items->Ship->jenis_kapal) ? $items->Ship->jenis_kapal : '-' }}</td>
                             <td scope="col">{{ !empty($items->schedule) ? $items->schedule : '-' }}</td>
                             <td scope="col">{{ !empty($items->from) ? $items->from : '-' }}</td>
                             <td scope="col">{{ !empty($items->destination) ? $items->destination : '-' }}</td>
@@ -98,6 +98,13 @@
                         <div class="form-group">
                             <label for="nama_kapal" class="form-label">Nama Kapal :</label>
                             <input type="text" name="nama_kapal" id="nama_kapal" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="jenis_kapal" class="form-label">Jenis Kapal :</label>
+                            <select class="form-select" name="jenis_kapal" id="jenis_kapal" aria-label="Default select example">
+                                <option value="Kapal Barang">Kapal Barang</option>
+                                <option value="Kapal Penumpang">Kapal Penumpang</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="logo_kapal" class="form-label">Logo Kapal :</label>

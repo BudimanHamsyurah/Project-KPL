@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('ships', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kapal');
+            $table->string('jenis_kapal');
             $table->string('logo_kapal');
             $table->timestamps();
         });

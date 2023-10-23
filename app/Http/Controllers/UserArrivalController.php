@@ -15,4 +15,17 @@ class UserArrivalController extends Controller
         return view('welcome', compact('ships', 'arrival'));
     }
 
+    public function updateData(Request $request)
+{
+    // Retrieve data from the request
+    $id = $request->input('id');
+    $newData = 'Bersandar';
+
+    // Perform the update operation (for example, using Eloquent)
+    Arrival::where('id', $id)->update(['status' => $newData]);
+
+    // Return a response
+    return redirect()->back();
+}
+
 }

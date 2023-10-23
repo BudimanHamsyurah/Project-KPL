@@ -34,6 +34,7 @@ class HomeController extends Controller
     {
         $request->validate([
             'nama_kapal' => ['required', 'string', 'min:5', 'max:50',],
+            'jenis_kapal' => ['required', 'string', 'min:5', 'max:50',],
             'logo_kapal' => ['required', 'image',],
             ]
         );

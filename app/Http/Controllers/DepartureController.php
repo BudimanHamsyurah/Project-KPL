@@ -31,6 +31,21 @@ class DepartureController extends Controller
         return view('admDeparture', compact('ships', 'departure'));
     }
 
+    public function addKapal(Request $request)
+    {
+        $request->validate([
+            'nama_kapal' => ['required', 'string', 'min:5', 'max:50',],
+            'jenis_kapal' => ['required', 'string', 'min:5', 'max:50',],
+            'logo_kapal' => ['required', 'image',],
+            ]
+        );
+        $data = $request->all();
+        $fileName = time().$request->file('logo_kapal')->getClientOriginalName();
+        $path = $request->file('logo_kapal')->storeAs('images', $fileName, 'public');
+        $data['logo_kapal'] ='/storage/'.$path;
+        Ship::create($data);
+        return redirect()->back()->with('success','Data Kapal Telah Ditambahkan');
+    }
     public function add_departure(Request $request)
     {
 

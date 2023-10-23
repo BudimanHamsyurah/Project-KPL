@@ -11,6 +11,7 @@ class Ship extends Model
 
     protected $fillable = [
         'nama_kapal',
+        'jenis_kapal',
         'logo_kapal'
     ];
 

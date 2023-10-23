@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DepartureController;
 use App\Http\Controllers\UserArrivalController;
 use App\Http\Controllers\UserDepartureController;
+use App\Http\Controllers\ConnectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/', [UserArrivalController::class, 'index']);
+Route::post('/autoProcess', [UserArrivalController::class, 'updateData'])->name('updateData');
 Route::get('/usrArrival', [UserArrivalController::class, 'index'])->name('usrArrival');
 Route::get('/usrDeparture', [UserDepartureController::class, 'index'])->name('usrDeparture');
 
