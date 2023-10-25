@@ -51,7 +51,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
-    <script>
+    <script> 
         setTimeout(function() {
             window.location.reload();
         }, 30000);
@@ -86,10 +86,8 @@
                 realTime = dt.getFullYear() + '-' + M + '-' + D + ' ' + h + ':' + m + ':' + s;
                 var change = "Bersandar";
                 var nChange = "Menunggu";
-                
                 var rowCount = document.getElementById('arrival').rows.length;
                 for (var i = 2; i < rowCount; i++) {
-                    
                     var type = document.getElementById("arrival").rows[i].cells.item(3);
                     var date = document.getElementById("arrival").rows[i].cells.item(4);
                     var time = document.getElementById("arrival").rows[i].cells.item(5);
@@ -122,9 +120,38 @@
                         }
                         return 0;
                     }
+                }
+            });
 
-                    else if(realTime > schedule && statusvalue == "Estimasi" && typeValue == "Kapal Penumpang"){
-                       
+            $(function() {
+                var dt = new Date(Date.now());
+                let M = dt.getMonth() + 1;
+                let D = dt.getDate();
+                let h = dt.getHours();
+                let m = dt.getMinutes();
+                let s = dt.getSeconds();
+                M = checkTime(M);
+                D = checkTime(D);
+                h = checkTime(h);
+                m = checkTime(m);
+                s = checkTime(s);
+                realTime = dt.getFullYear() + '-' + M + '-' + D + ' ' + h + ':' + m + ':' + s;
+                var change = "Bersandar";
+                var nChange = "Menunggu";
+                var rowCount = document.getElementById('arrival').rows.length;
+                for (var i = 2; i < rowCount; i++) {
+                    var type = document.getElementById("arrival").rows[i].cells.item(3);
+                    var date = document.getElementById("arrival").rows[i].cells.item(4);
+                    var time = document.getElementById("arrival").rows[i].cells.item(5);
+                    var tag = document.getElementById("arrival").rows[i].cells.item(8);
+                    var id = document.getElementById("arrival").rows[i].cells.item(0);
+                    idValue = id.innerText;
+                    typeValue = type.innerText;
+                    statusvalue = tag.innerText;
+                    dateValue = date.innerText;
+                    timeValue = time.innerText;
+                    schedule = dateValue + " " + timeValue;
+                    if(realTime > schedule && statusvalue == "Estimasi" && typeValue == "Kapal Penumpang"){
                         fetch('/autoProcess', {
                             method: 'POST',
                             headers: {
@@ -142,24 +169,59 @@
                         .catch(error => {
                             console.error(error); // Handle errors, if any
                         });
-                        for (var j = 2; j < rowCount; j++) {
+                        return 0;
+                    }
+                    else if(realTime > schedule && statusvalue == "Estimasi" && typeValue == "Kapal Barang"){
+                        for (var j = i+1; j < rowCount; j++) {
                             var types = document.getElementById("arrival").rows[j].cells.item(3);
                             var dates = document.getElementById("arrival").rows[j].cells.item(4);
                             var times = document.getElementById("arrival").rows[j].cells.item(5);
                             var tags = document.getElementById("arrival").rows[j].cells.item(8);
+                            var ids = document.getElementById("arrival").rows[j].cells.item(0);
+                            idValues = ids.innerText;
                             typeValues = types.innerText;
                             statusvalues = tags.innerText;
                             dateValues = dates.innerText;
                             timeValues = times.innerText;
                             schedules = dateValues + " " + timeValues;
-                            if(j != i ){
-                                if(realTime > schedules && statusvalues == "Estimasi"){
-                                    console.log(statusvalues);
-                                    tags.innerText = nChange;
-                                    tags.setAttribute("class", "text-muted");
-                                }
+                            if(realTime > schedules && statusvalues == "Estimasi" && typeValues == "Kapal Penumpang"){
+                                fetch('/autoProcess', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                    },
+                                    body: JSON.stringify({
+                                        id: idValues
+                                    })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data.message); // Handle the response from the server
+                                })
+                                .catch(error => {
+                                    console.error(error); // Handle errors, if any
+                                });
+                                return 0;
                             }
                         }
+                            fetch('/autoProcess', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                },
+                                body: JSON.stringify({
+                                    id: idValue
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data.message); // Handle the response from the server
+                            })
+                            .catch(error => {
+                                console.error(error); // Handle errors, if any
+                            });
                         return 0;
                     }
                 }

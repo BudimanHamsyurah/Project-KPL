@@ -45,7 +45,6 @@
                             <th scope="col">{{ __('Waktu Kedatangan') }}</th>
                             <th scope="col">{{ __('Status') }}</th>
                             <th scope="col">{{ __('Perubahan') }}</th>
-                            <th scope="col">{{ __('Proses') }}</th>
                             <th scope="col" hidden>{{ __('Selesai') }}</th>
                         </tr>
                     </thead>
@@ -65,9 +64,6 @@
                             <td scope="col">
                                 <a href="#" class="btn btn-primary btn-flat btn-xs edit" data-id="{{ !empty($items->id) ? $items->id : '-' }}"><i class="fa fa-pen"></i></a>
                                 <a href="#" class="btn btn-danger btn-flat btn-xs delete" data-id="{{ !empty($items->id) ? $items->id : '-' }}"><i class="fa fa-trash"></i></a>
-                            </td>
-                            <td scope="col">
-                                <a href="#" id='processing' class="btn btn-success btn-flat btn-xs process" data-id="{{ !empty($items->id) ? $items->id : '-' }}"><i class="fa fa-check"></i></a>
                             </td>
                             <td scope="col" hidden>
                                 <a href="#" class="btn btn-dark btn-flat btn-xs finish" data-id="{{ !empty($items->id) ? $items->id : '-' }}"><i class="bi bi-check2-all"></i></a>
@@ -368,9 +364,7 @@
                     value = tag.innerText;
                     if (value == 'Bersandar') {
                         for (var j = 0; j < rowCount; j++) {
-                            var hide = document.getElementById("arrival").rows[j].cells[9];
-                            var show = document.getElementById("arrival").rows[j].cells[10];
-                            hide.hidden = true;
+                            var show = document.getElementById("arrival").rows[j].cells[9];
                             if (j == 0) {
                                 show.hidden = false;
                             } else if (j == i) {
